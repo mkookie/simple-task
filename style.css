@@ -1,0 +1,470 @@
+body {
+  font-family: sans-serif;
+  padding: 50px;
+  text-align: center;
+}
+
+.date-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.date-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.date-controls label {
+  font-weight: 700;
+}
+
+.date-controls select {
+  min-width: 6.5rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.emoji-picker-wrapper {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.emoji-picker-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#habit-emoji-display {
+  min-width: 220px;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+#habit-emoji-display:focus {
+  outline: 2px solid #0078d4;
+}
+
+#emoji-toggle {
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+#picker {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.5rem);
+  left: 0;
+}
+
+#picker[hidden] {
+  display: none;
+}
+
+
+/* 登録中の習慣 */
+#habits-list {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0 auto;
+  /* list-style: none; */
+}
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.habit-item span,
+.habit-item input,
+.habit-item button {
+  vertical-align: middle;
+}
+
+.habit-emoji-button {
+  min-width: 2.5rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.calendar-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.mobile-week-nav {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.mobile-week-nav button {
+  padding: 0.65rem 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.calendar-weekdays {
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.25rem;
+  color: #444;
+  font-weight: 700;
+}
+
+.calendar-weekdays div {
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+}
+
+.calendar-grid {
+  gap: 0.5rem;
+}
+
+.calendar-cell {
+  min-height: 140px;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.calendar-cell.selected {
+  border-color: #0078d4;
+  box-shadow: 0 0 0 1px rgba(0, 120, 212, 0.2);
+}
+
+.calendar-cell.empty {
+  background: #f8f8f8;
+  border-color: #eee;
+}
+
+.calendar-day {
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.calendar-habits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.calendar-habit label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  white-space: normal;
+  flex-wrap: wrap;
+  color: #111;
+  font-weight: 600;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    font-weight 0.2s ease;
+}
+
+.calendar-habit label span {
+  opacity: 1;
+  min-width: 0;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    font-weight 0.2s ease;
+}
+
+.calendar-habit label span:last-child {
+  overflow-wrap: anywhere;
+}
+
+.calendar-habit input {
+  margin: 0;
+}
+
+.calendar-habit input:checked + span,
+.calendar-habit input:checked + span + span {
+  color: #111;
+  opacity: 1;
+}
+
+.calendar-habit input:checked + span + span {
+  font-weight: 700;
+}
+
+.calendar-habit input:checked + span + span {
+  font-weight: 700;
+}
+
+.calendar-empty {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.progress-container {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #0078d4;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.habit-edit-input {
+  min-width: 10rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#undo-delete-button {
+  margin-top: 0.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid #0078d4;
+  background: #0078d4;
+  color: #fff;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+#undo-delete-button[hidden] {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  body {
+    padding: 24px;
+  }
+
+  .date-controls {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .date-controls select,
+  #habit-emoji-display,
+  #emoji-toggle,
+  .habit-edit-input,
+  .progress-bar {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #habits-list {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .habit-item {
+    justify-content: space-between;
+  }
+
+  .calendar-container {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 16px;
+  }
+
+  .date-header {
+    gap: 0.5rem;
+  }
+
+  .date-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .date-controls label {
+    width: 100%;
+    text-align: center;
+  }
+
+  .emoji-picker-input {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .habit-emoji-button,
+  .habit-edit-input,
+  .date-controls select,
+  #emoji-toggle {
+    width: 100%;
+  }
+
+  .habit-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  #habits-list {
+    align-items: center;
+  }
+
+  .habit-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .calendar-cell {
+    min-height: 120px;
+    padding: 0.65rem;
+  }
+
+  .calendar-weekdays {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .calendar-weekdays div,
+  .calendar-day {
+    font-size: 0.9rem;
+  }
+
+  .calendar-habits {
+    gap: 0.25rem;
+  }
+
+  .progress-bar {
+    max-width: 100%;
+  }
+
+  .mobile-week-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  .calendar-weekdays {
+    display: none;
+  }
+
+  .calendar-grid {
+    display: block;
+  }
+
+  .calendar-cell {
+    width: 100%;
+    max-width: 100%;
+    min-height: 120px;
+    margin-bottom: 0.75rem;
+  }
+
+  .calendar-day {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .calendar-habits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.4rem;
+  }
+
+  .calendar-habit label {
+    font-size: 0.88rem;
+    padding: 0.35rem 0.55rem;
+    background: #f5f7fb;
+    border-radius: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .calendar-habit label span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 8rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .calendar-container {
+    padding-bottom: 5rem;
+  }
+}
