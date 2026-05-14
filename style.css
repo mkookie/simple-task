@@ -181,6 +181,13 @@ body {
   box-shadow: 0 0 0 1px rgba(0, 120, 212, 0.2);
 }
 
+.calendar-cell:hover:not(.empty) {
+  border-color: #0078d4;
+  background: #f0f8ff;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.15);
+  transition: all 0.2s ease;
+}
+
 .calendar-cell.empty {
   background: #f8f8f8;
   border-color: #eee;
@@ -340,11 +347,19 @@ body {
 
 @media (max-width: 700px) {
   body {
-    padding: 16px;
+    padding: 16px 0;
   }
 
-  .date-header {
-    gap: 0.5rem;
+  header {
+    padding: 0 16px;
+  }
+
+  main {
+    padding: 0 16px;
+  }
+
+  footer {
+    padding: 0 16px;
   }
 
   .date-controls {
@@ -430,7 +445,7 @@ body {
   }
 
   .calendar-cell {
-    width: 100%;
+    width: 95%;
     max-width: 100%;
     min-height: 120px;
     margin-bottom: 0.75rem;
@@ -465,6 +480,7 @@ body {
   }
 
   .calendar-container {
-    padding-bottom: 5rem;
+    padding: 0 0 5rem 0;
+    margin: 0;
   }
 }
